@@ -12,7 +12,8 @@ module.exports = function(grunt) {
     grunt.initConfig({
         jshint: {
             options: {
-                node : true,        // browser variables
+                node : true,        // node variables
+                browser : true,     // browser variables
                 curly: true,        // disallow functions without curly braces
                 eqeqeq: true,       // === and  !== instead of == and !=
                 strict: true,       // have to enable strict mode
@@ -27,7 +28,6 @@ module.exports = function(grunt) {
                 eqnull: true,       // allow variable comparison with null or undefined
                 laxcomma: true,     // allow commas before variables or keys
                 globals: {
-
                 },
                 reporter: require('jshint-stylish')
             },
