@@ -1,0 +1,30 @@
+{
+  "name": "upper",
+  "version": "0.1.0",
+  "description": "File uploader using websockets and the filereader web api",
+  "main": "lib/index.js",
+  "private": true,
+  "scripts": {
+    "test": "grunt test"
+  },
+  "keywords": [
+    "file",
+    "uploader",
+    "upload",
+    "image"
+  ],
+  "author": "Iyad Assaf <iyadassaflondon@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-cli": "^0.1.13",
+    "mocha": "^1.21.0",
+    "jshint": "^2.5.2",
+    "jshint-stylish": "^0.4.0",
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-jsdox": "^0.1.5",
+    "grunt-mocha-test": "^0.11.0",
+    "express": "^4.7.0",
+    "chai": "^1.9.1"
+  }
+}
