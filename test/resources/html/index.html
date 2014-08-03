@@ -1,17 +1,18 @@
 <html>
     <head>
         <script src='/upper.min.js'></script>
+        <script src='/socket.io/socket.io.js'></script>
     </head>
     <body>
         <input id="fileUpload" type="file" />
-        <button id="upload"> Upload </button>
-
+        <img id="preview" style="max-width:300px;" />
         <script>
             (function () {
-                var upper = new Upper();
-                upper.listen(document.querySelectorAll('input'));
+                var socket = io.connect();
+                var upper = new Upper({ transport: [socket] });
+                upper.listen(window.document.getElementById('fileUpload'));
                 upper.on('preview', function (url) {
-
+                    window.document.getElementById('preview').setAttribute('src', url);
                 });
                 upper.on('data', function (data) {
 

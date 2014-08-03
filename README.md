@@ -17,4 +17,3 @@ Firefox
 
 ###Future features
 - Upload from facebook, twitter, g+ etc
-- Basically make filepicker obsolete, because fuck them.

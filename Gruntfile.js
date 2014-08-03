@@ -63,19 +63,19 @@ module.exports = function(grunt) {
                 stripHeaders: true
             },
             dist: {
-                src: ['lib/static/dev/upper.js', 'lib/static/dev/browser.js'],
+                src: ['lib/static/dev/core.js', 'lib/static/dev/browser.js'],
                 dest: 'lib/static/dev/temp.js'
             },
             angular: {
-                src: ['lib/static/dev/upper.js', 'lib/static/dev/ng-upper.js'],
+                src: ['lib/static/dev/core.js', 'lib/static/dev/ng-upper.js'],
                 dest: 'lib/static/dev/ng-temp.js'
             },
         },
         browserify: {
             dist: {
                 files: {
-                    'lib/static/dist/upper.js': ['lib/static/dev/temp.js'],
-                    'lib/static/dist/ng-upper.js': ['lib/static/dev/ng-temp.js']
+                    'lib/static/dist/upper.js': ['lib/static/dev/temp.js', 'lib/utility/detective.js'],
+                    'lib/static/dist/ng-upper.js': ['lib/static/dev/ng-temp.js', 'lib/utility/ædetective.js']
                 },
                 options: {
                 }
@@ -109,7 +109,7 @@ module.exports = function(grunt) {
                 options: {
                     port: 9000
                 },
-                command: 'node example/server/express.js'
+                command: 'node test/resources/server.js'
             }
         },
         protractor: {
