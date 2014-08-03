@@ -64,11 +64,11 @@ module.exports = function(grunt) {
             },
             dist: {
                 src: ['lib/static/dev/upper.js', 'lib/static/dev/browser.js'],
-                dest: 'lib/static/upper.js'
+                dest: 'lib/static/dist/upper.js'
             },
             angular: {
                 src: ['lib/static/dev/upper.js', 'lib/static/dev/ng-upper.js'],
-                dest: 'lib/static/ng-upper.js'
+                dest: 'lib/static/dist/ng-upper.js'
             },
         },
         express: {

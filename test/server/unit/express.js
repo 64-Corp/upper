@@ -37,7 +37,7 @@
             request(app).get('/upper.js')
             .expect(200)
             .expect('Content-Type', 'text/javascript; charset=utf-8')
-            .expect(fs.readFileSync(process.cwd() + '/lib/static/upper.js', 'utf-8'))
+            .expect(fs.readFileSync(process.cwd() + '/lib/static/dist/upper.js', 'utf-8'))
             .end(function (err, res) {
                 if (err) throw err;
             });
@@ -46,7 +46,7 @@
             request(app).get('/ng-upper.js')
             .expect(200)
             .expect('Content-Type', 'text/javascript; charset=utf-8')
-            .expect(fs.readFileSync(process.cwd() + '/lib/static/ng-upper.js', 'utf-8'))
+            .expect(fs.readFileSync(process.cwd() + '/lib/static/dist/ng-upper.js', 'utf-8'))
             .end(function (err, res) {
                 if (err) throw err;
             });
