@@ -83,7 +83,19 @@ module.exports = function(grunt) {
         },
         shell: {
             express: {
+                options: {
+                    port: 9000
+                },
                 command: 'node example/server/express.js'
+            }
+        },
+        protractor: {
+            options: {
+                configFile: "test/e2e/e2e.conf.js",
+                    keepAlive: false,
+                    noColor: false,
+                args: {
+                }
             }
         }
     });
@@ -95,13 +107,17 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-express-server');
     grunt.loadNpmTasks('grunt-shell');
+    grunt.loadNpmTasks('grunt-protractor-runner');
+    grunt.loadNpmTasks('grunt-mocha-selenium');
 
     // tasks
     grunt.registerTask('build', ['concat:dist', 'concat:angular']);
     grunt.registerTask('lint', ['jshint']);
-    grunt.registerTask('test', ['test:backend', 'test:frontend']);
-    grunt.registerTask('test:backend', ['mochaTest']);
     grunt.registerTask('test:frontend', ['express']);
+    grunt.registerTask('test:e2e', ['express', 'protractor']);
+    // grunt.registerTask('test:e2e', ['express', 'mochaSelenium']);
+    grunt.registerTask('test:backend', ['mochaTest']);
+    grunt.registerTask('test', ['test:backend', 'test:frontend', 'test:e2e']);
     grunt.registerTask('example', ['shell:express']);
-    grunt.registerTask('default', ['build', 'mochaTest', 'lint']);
+    grunt.registerTask('default', ['build', 'test', 'lint']);
 };

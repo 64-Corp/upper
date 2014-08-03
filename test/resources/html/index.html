@@ -1,0 +1,24 @@
+<html>
+    <head>
+        <script src='/upper.js'></script>
+    </head>
+    <body>
+        <input id="fileUpload" type="file" />
+        <button id="upload"> Upload </button>
+
+        <script>
+            (function () {
+
+                var upper = new Upper();
+                upper.listen(document.querySelectorAll('input'));
+                // upper.on('preview', function (url) {
+                //
+                // })
+                // upper.on('data', function (data) {
+                //
+                // });
+            })();
+
+        </script>
+    </body>
+</html>

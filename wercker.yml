@@ -7,6 +7,13 @@ build:
     # Install node module packages
     - npm-install
 
+    # Build client files
+    - script:
+        name: Build the client files
+        code: |
+          sudo ./node_modules/.bin/grunt build
+
+
     # Build the project, and run the tests
     - npm-test
 

@@ -4,7 +4,6 @@
     /**
      * @test ExpressJs integration
      */
-
     var upper, app, io, request, fs, http, server;
     beforeEach(function () {
         upper =     require('../../../index.js')({ some: 'args' }),
@@ -34,6 +33,7 @@
 
         it('should host upper.js and ng-upper.js', function () {
 
+            // upper.js
             request(app).get('/upper.js')
             .expect(200)
             .expect('Content-Type', 'text/javascript; charset=utf-8')
@@ -42,6 +42,7 @@
                 if (err) throw err;
             });
 
+            // ng-upper.js
             request(app).get('/ng-upper.js')
             .expect(200)
             .expect('Content-Type', 'text/javascript; charset=utf-8')
