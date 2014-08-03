@@ -96,7 +96,13 @@ module.exports = function(grunt) {
                     noColor: false,
                 args: {
                 }
-            }
+            },
+            your_target: {
+                options: {
+                    // configFile: "e2e.conf.js", // Target-specific config file
+                    // args: {} // Target-specific arguments
+                }
+            },
         }
     });
 
