@@ -12,5 +12,4 @@
             lib.should.be.an.instanceOf(require('../../../lib/upper.js'));
         });
     });
-
 })();

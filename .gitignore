@@ -1,3 +1,4 @@
 node_modules
 .DS_Store
 test/resources/bower_components
+lib/static/dist

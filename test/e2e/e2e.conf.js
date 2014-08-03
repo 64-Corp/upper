@@ -13,18 +13,18 @@ exports.config = {
 
     exclude: [],
     maxSessions: -1,
-    capabilities: {
-        browserName: 'chrome',
-        count: 1,
-        shardTestFiles: false,
-        maxInstances: 1
-    },
-
     // capabilities: {
-    //     browserName: 'phantomjs',
-    //     version: '',
-    //     platform: 'ANY'
+    //     browserName: 'chrome',
+    //     count: 1,
+    //     shardTestFiles: false,
+    //     maxInstances: 1
     // },
+
+    capabilities: {
+        browserName: 'phantomjs',
+        version: '',
+        platform: 'ANY'
+    },
 
     multiCapabilities: [],
     baseUrl: 'http://127.0.0.1:9000',

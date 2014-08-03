@@ -1,6 +1,6 @@
 <html>
     <head>
-        <script src='/upper.js'></script>
+        <script src='/upper.min.js'></script>
     </head>
     <body>
         <input id="fileUpload" type="file" />
@@ -8,15 +8,14 @@
 
         <script>
             (function () {
-
                 var upper = new Upper();
                 upper.listen(document.querySelectorAll('input'));
-                // upper.on('preview', function (url) {
-                //
-                // })
-                // upper.on('data', function (data) {
-                //
-                // });
+                upper.on('preview', function (url) {
+
+                });
+                upper.on('data', function (data) {
+
+                });
             })();
 
         </script>

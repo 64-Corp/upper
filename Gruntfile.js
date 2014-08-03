@@ -30,7 +30,7 @@ module.exports = function(grunt) {
                 laxcomma: true,     // allow commas before variables or keys
                 globals: {
                 },
-                ignores: ['example/client/public/bower_components/**/**/**/**/**/*.js', 'lib/static/dev/*.js'],
+                ignores: ['example/client/public/bower_components/**/**/**/**/**/*.js', 'lib/static/dev/*.js', 'lib/static/dist/*.js'],
                 reporter: require('jshint-stylish')
             },
             uses_defaults: ['lib/**/**/*.js', 'example/**/**/**/*.js']
@@ -64,12 +64,35 @@ module.exports = function(grunt) {
             },
             dist: {
                 src: ['lib/static/dev/upper.js', 'lib/static/dev/browser.js'],
-                dest: 'lib/static/dist/upper.js'
+                dest: 'lib/static/dev/temp.js'
             },
             angular: {
                 src: ['lib/static/dev/upper.js', 'lib/static/dev/ng-upper.js'],
-                dest: 'lib/static/dist/ng-upper.js'
+                dest: 'lib/static/dev/ng-temp.js'
             },
+        },
+        browserify: {
+            dist: {
+                files: {
+                    'lib/static/dist/upper.js': ['lib/static/dev/temp.js'],
+                    'lib/static/dist/ng-upper.js': ['lib/static/dev/ng-temp.js']
+                },
+                options: {
+                }
+            }
+        },
+        uglify: {
+            dist: {
+                files: {
+                    'lib/static/dist/upper.min.js': ['lib/static/dist/upper.js'],
+                    'lib/static/dist/ng-upper.min.js': ['lib/static/dist/ng-upper.js']
+                }
+            }
+        },
+        clean: {
+            build: {
+                src: ["lib/static/dev/temp.js", "lib/static/dev/ng-temp.js"]
+            }
         },
         express: {
             options: {
@@ -115,15 +138,17 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-shell');
     grunt.loadNpmTasks('grunt-protractor-runner');
     grunt.loadNpmTasks('grunt-mocha-selenium');
+    grunt.loadNpmTasks('grunt-browserify');
+    grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
 
     // tasks
-    grunt.registerTask('build', ['concat:dist', 'concat:angular']);
+    grunt.registerTask('build', ['concat:dist', 'concat:angular', 'browserify', 'uglify', 'clean']);
     grunt.registerTask('lint', ['jshint']);
     grunt.registerTask('test:frontend', ['express']);
     grunt.registerTask('test:e2e', ['express', 'protractor']);
-    // grunt.registerTask('test:e2e', ['express', 'mochaSelenium']);
     grunt.registerTask('test:backend', ['mochaTest']);
-    grunt.registerTask('test', ['test:backend', 'test:frontend', 'test:e2e']);
+    grunt.registerTask('test', ['test:backend', 'test:frontend']);
     grunt.registerTask('example', ['shell:express']);
     grunt.registerTask('default', ['build', 'test', 'lint']);
 };
