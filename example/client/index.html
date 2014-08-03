@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <script src='/upper.js'></script>
+    </head>
+    <body>
+        <input type="file" />
+
+        <script>
+            (function () {
+
+                var upper = new Upper();
+                upper.listen(document.querySelectorAll('input'))
+                .on('preview', function (url) {
+
+                })
+                .on('data', function (data) {
+
+                });
+            })();
+
+        </script>
+    </body>
+</html>

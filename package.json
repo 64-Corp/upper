@@ -2,7 +2,7 @@
   "name": "upper",
   "version": "0.1.0",
   "description": "File uploader using websockets and the filereader web api",
-  "main": "lib/index.js",
+  "main": "index.js",
   "private": true,
   "scripts": {
     "test": "grunt test"
@@ -25,6 +25,20 @@
     "grunt-jsdox": "^0.1.5",
     "grunt-mocha-test": "^0.11.0",
     "express": "^4.7.0",
-    "chai": "^1.9.1"
+    "chai": "^1.9.1",
+    "phantomjs": "^1.9.7-15",
+    "socket.io": "^1.0.6",
+    "grunt-contrib-concat": "^0.5.0",
+    "selenium-standalone": "^2.42.0-2.9.0-1",
+    "grunt-express-server": "^0.4.17",
+    "npm": "^1.4.23",
+    "install": "^0.1.7",
+    "grunt-express": "^1.4.1",
+    "grunt-shell": "^0.7.0",
+    "supertest": "^0.13.0"
+  },
+  "dependencies": {
+    "serve-static": "^1.4.3",
+    "node-static": "^0.7.4"
   }
 }

@@ -1,0 +1,19 @@
+{
+  "name": "upper",
+  "version": "0.1.0",
+  "homepage": "https://github.com/IyadAssaf/upper",
+  "authors": [
+    "iyadassaf <iyadassaflondon@gmail.com>"
+  ],
+  "description": "Example for integrated file uploader for node, socket.io and angular",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "angular": "~1.2.18",
+    "requirejs": "~2.1.14"
+  },
+  "devDependencies": {
+    "jasmine": "~2.0.1",
+    "chai": "~1.9.1"
+  }
+}

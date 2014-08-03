@@ -10,6 +10,7 @@ module.exports = function(grunt) {
     'use strict';
 
     grunt.initConfig({
+        pkg: grunt.file.readJSON('package.json'),
         jshint: {
             options: {
                 node : true,        // node variables
@@ -29,9 +30,10 @@ module.exports = function(grunt) {
                 laxcomma: true,     // allow commas before variables or keys
                 globals: {
                 },
+                ignores: ['example/client/public/bower_components/**/**/**/**/**/*.js', 'lib/static/dev/*.js'],
                 reporter: require('jshint-stylish')
             },
-            uses_defaults: ['lib/**/**/*.js']
+            uses_defaults: ['lib/**/**/*.js', 'example/**/**/**/*.js']
         },
         jsdox: {
             generate: {
@@ -40,7 +42,7 @@ module.exports = function(grunt) {
                     contentsTitle: 'Upper',
                     contentsFile: 'readme.md'
                 },
-                src: ['lib/**/**/*.js', 'test/**/**/*.js'],
+                src: ['lib/**/**/*.js', 'test/server/**/*.js', 'test/client/**/*.js'],
                 dest: 'docs'
             }
         },
@@ -51,7 +53,37 @@ module.exports = function(grunt) {
                     growl: true,
                     colors: true
                 },
-                src: ['test/**/**/**/*.js']
+                src: ['test/server/**/**/*.js', 'test/common.js']
+            }
+        },
+        concat: {
+            options: {
+                banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' + '<%= grunt.template.today("yyyy-mm-dd") %> */ \n \n (function () { \n',
+                footer: '\n })();\n',
+                stripHeaders: true
+            },
+            dist: {
+                src: ['lib/static/dev/upper.js', 'lib/static/dev/browser.js'],
+                dest: 'lib/static/upper.js'
+            },
+            angular: {
+                src: ['lib/static/dev/upper.js', 'lib/static/dev/ng-upper.js'],
+                dest: 'lib/static/ng-upper.js'
+            },
+        },
+        express: {
+            options: {
+            },
+            test: {
+                options: {
+                    script: 'test/resources/server.js',
+                    spawn: false
+                }
+            }
+        },
+        shell: {
+            express: {
+                command: 'node example/server/express.js'
             }
         }
     });
@@ -60,10 +92,16 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-jsdox');
     grunt.loadNpmTasks('grunt-mocha-test');
+    grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-express-server');
+    grunt.loadNpmTasks('grunt-shell');
 
     // tasks
+    grunt.registerTask('build', ['concat:dist', 'concat:angular']);
     grunt.registerTask('lint', ['jshint']);
-    grunt.registerTask('test', ['mochaTest']);
-    grunt.registerTask('docs', ['jsdox']);
-    grunt.registerTask('default', ['mochaTest', 'lint', 'docs']);
+    grunt.registerTask('test', ['test:backend', 'test:frontend']);
+    grunt.registerTask('test:backend', ['mochaTest']);
+    grunt.registerTask('test:frontend', ['express']);
+    grunt.registerTask('example', ['shell:express']);
+    grunt.registerTask('default', ['build', 'mochaTest', 'lint']);
 };
