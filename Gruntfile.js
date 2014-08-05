@@ -28,6 +28,7 @@ module.exports = function(grunt) {
                 unused: true,       // disallows unused variables
                 eqnull: true,       // allow variable comparison with null or undefined
                 laxcomma: true,     // allow commas before variables or keys
+                '-W018': true,      // Ignore `confusing use of ..` - this stops warning for `!!`
                 globals: {
                 },
                 ignores: ['example/client/public/bower_components/**/**/**/**/**/*.js', 'lib/static/dev/*.js', 'lib/static/dist/*.js'],
@@ -53,7 +54,7 @@ module.exports = function(grunt) {
                     growl: true,
                     colors: true
                 },
-                src: ['test/server/**/**/*.js', 'test/common.js']
+                src: ['test/server/**/**/*Spec.js', 'test/common.js']
             }
         },
         concat: {
@@ -74,8 +75,8 @@ module.exports = function(grunt) {
         browserify: {
             dist: {
                 files: {
-                    'lib/static/dist/upper.js': ['lib/static/dev/temp.js', 'lib/utility/detective.js'],
-                    'lib/static/dist/ng-upper.js': ['lib/static/dev/ng-temp.js', 'lib/utility/ædetective.js']
+                    'lib/static/dist/upper.js': ['lib/static/dev/temp.js'],
+                    'lib/static/dist/ng-upper.js': ['lib/static/dev/ng-temp.js']
                 },
                 options: {
                 }
@@ -148,7 +149,7 @@ module.exports = function(grunt) {
     grunt.registerTask('test:frontend', ['express']);
     grunt.registerTask('test:e2e', ['express', 'protractor']);
     grunt.registerTask('test:backend', ['mochaTest']);
-    grunt.registerTask('test', ['test:backend', 'test:frontend']);
+    grunt.registerTask('test', ['test:backend']);
     grunt.registerTask('example', ['shell:express']);
     grunt.registerTask('default', ['build', 'test', 'lint']);
 };

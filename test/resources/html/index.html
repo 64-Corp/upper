@@ -9,7 +9,7 @@
         <script>
             (function () {
                 var socket = io.connect();
-                var upper = new Upper({ transport: [socket] });
+                window.upper = new Upper({ transport: [socket] });
                 upper.listen(window.document.getElementById('fileUpload'));
                 upper.on('preview', function (url) {
                     window.document.getElementById('preview').setAttribute('src', url);
