@@ -127,6 +127,25 @@ module.exports = function(grunt) {
                     // args: {} // Target-specific arguments
                 }
             },
+        },
+        // Distribution
+        mkdir: {
+            dist: {
+                options: {
+                    create: ['dist', './dist']
+                },
+            },
+        },
+        copy: {
+            dist: {
+                files: [
+                    {
+                        expand: true,
+                        src: ['index.js', 'package.json', 'README.md', 'lib/**/**/**/**/*.js'],
+                        dest: 'dist'
+                    }
+                ]
+            }
         }
     });
 
@@ -142,6 +161,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-browserify');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-mkdir');
+    grunt.loadNpmTasks('grunt-contrib-copy');
 
     // tasks
     grunt.registerTask('build', ['concat:dist', 'concat:angular', 'browserify', 'uglify', 'clean']);
@@ -151,5 +172,6 @@ module.exports = function(grunt) {
     grunt.registerTask('test:backend', ['mochaTest']);
     grunt.registerTask('test', ['test:backend']);
     grunt.registerTask('example', ['shell:express']);
-    grunt.registerTask('default', ['build', 'test', 'lint']);
+    grunt.registerTask('dist', ['mkdir:dist', 'copy:dist']);
+    grunt.registerTask('default', ['build', 'test', 'lint', 'dist']);
 };
