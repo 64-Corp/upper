@@ -5,8 +5,8 @@
     'use strict';
 
     var app = require('express')();
-    var upper = new (require('../../lib/upper.js'))();
     var server = require('http').createServer(app);
+    var upper = new (require('../../lib/upper.js'))({ server: server });
     var io = require('socket.io').listen(server);
 
     app.set('port', 9000);
@@ -27,8 +27,9 @@
 
     server.listen(app.get('port'), function () {
         console.log('Listening on port ' + app.get('port'));
+
         io.on('connection', function (socket) {
-            console.log('Connected to client');
+            console.log('Socket.io: Connected to client');
         });
     });
 })();

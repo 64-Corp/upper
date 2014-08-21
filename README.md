@@ -6,6 +6,7 @@ upper
 File uploader with backend express support and frontend AMD support.
 
 Transport should primaily be via websockets and utilize the browser FileReader api, which should be supported in the below browsers.
+The `ws` library is used to listen to ws://.../upper to establish a file upload queue between the client and the server
 
 **Needs to support:**
 - IE10+

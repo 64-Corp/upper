@@ -1,5 +1,5 @@
 node_modules
 .DS_Store
-test/resources/bower_components
+/test/resources/public/bower_components
 lib/static/dist
 dist

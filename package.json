@@ -5,7 +5,11 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "test": "./node_modules/.bin/grunt test"
+    "postinstall": "node_modules/.bin/grunt build",
+    "test": "node_modules/.bin/bower install && node_modules/.bin/grunt test",
+    "start": "node index.js --scheme=production",
+    "local": "node index.js --scheme=local",
+    "dev": "node_modules/.bin/grunt test && node index.js --scheme=dev"
   },
   "keywords": [
     "file",
@@ -47,10 +51,12 @@
     "grunt-contrib-clean": "^0.6.0",
     "grunt-contrib-uglify": "^0.5.1",
     "grunt-mkdir": "^0.1.2",
-    "grunt-contrib-copy": "^0.5.0"
+    "grunt-contrib-copy": "^0.5.0",
+    "ws": "^0.4.32"
   },
   "dependencies": {
     "serve-static": "^1.4.3",
-    "node-static": "^0.7.4"
+    "node-static": "^0.7.4",
+    "q": "^1.0.1"
   }
 }

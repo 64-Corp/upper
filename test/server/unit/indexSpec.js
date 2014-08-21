@@ -1,9 +1,10 @@
 (function () {
     'use strict';
-
-    var lib;
+    
+    var lib, http, server;
     beforeEach(function () {
-        lib = require('../../../index.js')({ some: 'args' });
+        server = require('http').createServer(),
+        lib = require('../../../index.js')({ server: server });
     });
 
     describe('Upper object', function () {

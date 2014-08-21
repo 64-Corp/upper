@@ -4,14 +4,15 @@
     /**
      * @test ExpressJs integration
      */
-    var upper, app, io, request, fs, http, server;
+    var upper, app, io, request, fs, http, server, WSServer;
     beforeEach(function () {
-        upper =     require('../../../index.js')({ some: 'args' }),
-        app =       require('express')(),
-        io =        require('socket.io'),
-        request =   require('supertest'),
         fs =        require('fs'),
-        http =      require('http');
+        http =      require('http'),
+        app =       require('express')(),
+        server =    http.createServer(app),
+        upper =     require('../../../index.js')({ server: server }),
+        WSServer =  require('ws').Server,
+        request =   require('supertest');
     });
 
     describe('expressjs integration', function () {
@@ -22,7 +23,7 @@
             app.use(upper.client({ express: true, angular: true }))
 
             // Create the server and listen
-            server = http.createServer(app);
+
             server.listen(process.env.PORT || 5000);
         });
 
@@ -53,9 +54,6 @@
         });
 
         it('should detect that http and socket.io are preffered transport methods', function () {
-            io.listen(server);
-
-
 
         });
     });
