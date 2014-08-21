@@ -5,7 +5,7 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "postinstall": "node_modules/.bin/grunt build",
+    "postinstall": "node_modules/.bin/grunt --gruntfile GruntfileBuild.js",
     "test": "node_modules/.bin/bower install && node_modules/.bin/grunt test",
     "start": "node index.js --scheme=production",
     "local": "node index.js --scheme=local",
@@ -30,7 +30,6 @@
     "grunt-mocha-test": "^0.11.0",
     "express": "^4.7.0",
     "chai": "^1.9.1",
-    "phantomjs": "^1.9.7-15",
     "socket.io": "^1.0.6",
     "grunt-contrib-concat": "^0.5.0",
     "selenium-standalone": "^2.42.0-2.9.0-1",
@@ -57,6 +56,12 @@
   "dependencies": {
     "serve-static": "^1.4.3",
     "node-static": "^0.7.4",
-    "q": "^1.0.1"
+    "q": "^1.0.1",
+    "grunt-browserify": "^2.1.4",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-contrib-concat": "^0.5.0",
+    "grunt-contrib-uglify": "^0.5.1",
+    "grunt-mkdir": "^0.1.2",
+    "grunt-contrib-copy": "^0.5.0"
   }
 }
