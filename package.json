@@ -47,9 +47,7 @@
     "grunt-contrib-uglify": "^0.5.1",
     "grunt-mkdir": "^0.1.2",
     "grunt-contrib-copy": "^0.5.0",
-    "ws": "^0.4.32",
-    "protractor": "^1.0.0",
-    "grunt-protractor-runner": "^1.0.0"
+    "ws": "^0.4.32"
   },
   "dependencies": {
     "serve-static": "^1.4.3",

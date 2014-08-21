@@ -113,21 +113,21 @@ module.exports = function(grunt) {
                 command: 'node test/resources/server.js'
             }
         },
-        protractor: {
-            options: {
-                configFile: "test/e2e/e2e.conf.js",
-                    keepAlive: false,
-                    noColor: false,
-                args: {
-                }
-            },
-            your_target: {
-                options: {
-                    // configFile: "e2e.conf.js", // Target-specific config file
-                    // args: {} // Target-specific arguments
-                }
-            },
-        },
+        // protractor: {
+        //     options: {
+        //         configFile: "test/e2e/e2e.conf.js",
+        //             keepAlive: false,
+        //             noColor: false,
+        //         args: {
+        //         }
+        //     },
+        //     your_target: {
+        //         options: {
+        //             // configFile: "e2e.conf.js", // Target-specific config file
+        //             // args: {} // Target-specific arguments
+        //         }
+        //     },
+        // },
         // Distribution
         mkdir: {
             dist: {
@@ -156,7 +156,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-express-server');
     grunt.loadNpmTasks('grunt-shell');
-    grunt.loadNpmTasks('grunt-protractor-runner');
     grunt.loadNpmTasks('grunt-mocha-selenium');
     grunt.loadNpmTasks('grunt-browserify');
     grunt.loadNpmTasks('grunt-contrib-clean');
@@ -168,7 +167,7 @@ module.exports = function(grunt) {
     grunt.registerTask('build', ['concat:dist', 'concat:angular', 'browserify', 'uglify', 'clean']);
     grunt.registerTask('lint', ['jshint']);
     grunt.registerTask('test:frontend', ['express']);
-    grunt.registerTask('test:e2e', ['express', 'protractor']);
+    grunt.registerTask('test:e2e', ['express']);
     grunt.registerTask('test:backend', ['mochaTest']);
     grunt.registerTask('test', ['test:backend']);
     grunt.registerTask('example', ['shell:express']);
