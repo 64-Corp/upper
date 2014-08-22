@@ -1,6 +1,6 @@
 <html>
     <head>
-        <script src='/upper.min.js'></script>
+        <script src='/upper.js'></script>
         <script src='/socket.io/socket.io.js'></script>
     </head>
     <body>
@@ -9,14 +9,14 @@
         <script>
             (function () {
                 var socket = io.connect();
-                
+
                 window.upper = new Upper();
                 upper.listen(window.document.getElementById('fileUpload'));
                 upper.on('preview', function (url) {
                     window.document.getElementById('preview').setAttribute('src', url);
                 });
-                upper.on('data', function (data) {
-
+                upper.on('progress', function (progress) {
+                    console.log(JSON.stringify(progress, null, 4));
                 });
             })();
 

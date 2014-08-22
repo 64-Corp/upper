@@ -9,6 +9,10 @@
     var upper = new (require('../../lib/upper.js'))({ server: server });
     var io = require('socket.io').listen(server);
 
+    upper.on('uploaded', function (fileData) {
+        console.log('fileData: ' + JSON.stringify(fileData));
+    });
+
     app.set('port', 9000);
     app.use(upper.client({ express: true, angular: true }))
     .use(require('express').static(__dirname + '/../../test/resources/public'))
