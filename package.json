@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "description": "File uploader using websockets and the filereader web api",
   "main": "index.js",
-  "private": true,
   "scripts": {
     "postinstall": "node_modules/.bin/grunt --gruntfile GruntfileBuild.js",
     "test": "node_modules/.bin/bower install && node_modules/.bin/grunt test",

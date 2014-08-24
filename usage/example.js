@@ -6,10 +6,6 @@ app.use(causeway.middleware());
 app.use(upper.client({ express: true, angular: true }));
 
 io.on('connection', function (socket) {
-    
-    // Use socket.io as transport
-    upper.use(socket);
-    causeway.use(socket);
 
     // configuration
     upper.config({
