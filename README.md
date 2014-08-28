@@ -1,7 +1,7 @@
 upper
 =====
 
-[![wercker status](https://app.wercker.com/status/06e639df26a492af27037e8f953b9178/s "wercker status")](https://app.wercker.com/project/bykey/06e639df26a492af27037e8f953b9178)
+[![wercker status](https://app.wercker.com/status/06e639df26a492af27037e8f953b9178/s "wercker status")](https://app.wercker.com/project/bykey/06e639df26a492af27037e8f953b9178) <img src="https://david-dm.org/iyadassaf/upper.png" />
 
 File uploader with backend express support and frontend AMD support.
 
