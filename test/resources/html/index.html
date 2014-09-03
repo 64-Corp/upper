@@ -10,12 +10,12 @@
             (function () {
                 var socket = io.connect();
 
-                window.upper = new Upper();
-                upper.listen(window.document.getElementById('fileUpload'));
-                upper.on('preview', function (url) {
+                var upper = Upper({ debug: true });
+                var uploader = upper.listen(window.document.getElementById('fileUpload'))
+                .on('preview', function (url) {
                     window.document.getElementById('preview').setAttribute('src', url);
-                });
-                upper.on('progress', function (progress) {
+                })
+                .on('progress', function (progress) {
                     console.log(JSON.stringify(progress, null, 4));
                 });
             })();

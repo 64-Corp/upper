@@ -8,7 +8,8 @@
     "test": "node_modules/.bin/bower install && node_modules/.bin/grunt test",
     "start": "node index.js --scheme=production",
     "local": "node index.js --scheme=local",
-    "dev": "node_modules/.bin/grunt test && node index.js --scheme=dev"
+    "dev": "node_modules/.bin/grunt test && node index.js --scheme=dev",
+    "example": "node ./test/resources/server.js --scheme=dev"
   },
   "keywords": [
     "file",
