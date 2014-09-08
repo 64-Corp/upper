@@ -11,7 +11,7 @@ build:
     - script:
         name: Check code quality
         code: |
-          sudo ./node_modules/.bin/bower install && sudo ./node_modules/.bin/grunt test:wercker
+          ./node_modules/.bin/bower install && ./node_modules/.bin/grunt test:wercker
 
     # Check code quality
     - script:
