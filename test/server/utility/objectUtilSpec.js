@@ -7,7 +7,7 @@
 var oUtil, MockObj, keys;
 beforeEach(function () {
 
-    oUtil = new (require('../../../../lib/utility/objectUtil.js'))();
+    oUtil = new (require('../../../lib/utility/objectUtil.js'))();
 
     MockObj = function () {
         this.test = 'this is some test text';

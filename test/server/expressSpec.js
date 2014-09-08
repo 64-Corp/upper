@@ -9,7 +9,7 @@ beforeEach(function () {
     http =      require('http'),
     app =       require('express')(),
     server =    http.createServer(app),
-    upper =     require('../../../index.js')({ server: server }),
+    upper =     require('../../index.js')({ server: server }),
     WSServer =  require('ws').Server,
     request =   require('supertest');
 });

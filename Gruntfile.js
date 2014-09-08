@@ -36,65 +36,6 @@ module.exports = function(grunt) {
             },
             uses_defaults: ['lib/**/**/*.js', 'example/**/**/**/*.js']
         },
-        jsdox: {
-            generate: {
-                options: {
-                    contentsEnabled: true,
-                    contentsTitle: 'Upper',
-                    contentsFile: 'readme.md'
-                },
-                src: ['lib/**/**/*.js', 'test/server/**/*.js', 'test/client/**/*.js'],
-                dest: 'docs'
-            }
-        },
-        mochaTest: {
-            lib: {
-                options: {
-                    reporter: 'spec',
-                    growl: true,
-                    colors: true
-                },
-                src: ['test/server/**/**/*Spec.js', 'test/common.js']
-            }
-        },
-        concat: {
-            options: {
-                banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' + '<%= grunt.template.today("yyyy-mm-dd") %> */ \n \n (function () { \n',
-                footer: '\n })();\n',
-                stripHeaders: true
-            },
-            dist: {
-                src: ['lib/static/dev/core.js', 'lib/static/dev/browser.js'],
-                dest: 'lib/static/dev/temp.js'
-            },
-            angular: {
-                src: ['lib/static/dev/core.js', 'lib/static/dev/ng-upper.js'],
-                dest: 'lib/static/dev/ng-temp.js'
-            },
-        },
-        browserify: {
-            dist: {
-                files: {
-                    'lib/static/dist/upper.js': ['lib/static/dev/temp.js'],
-                    'lib/static/dist/ng-upper.js': ['lib/static/dev/ng-temp.js']
-                },
-                options: {
-                }
-            }
-        },
-        uglify: {
-            dist: {
-                files: {
-                    'lib/static/dist/upper.min.js': ['lib/static/dist/upper.js'],
-                    'lib/static/dist/ng-upper.min.js': ['lib/static/dist/ng-upper.js']
-                }
-            }
-        },
-        clean: {
-            build: {
-                src: ["lib/static/dev/temp.js", "lib/static/dev/ng-temp.js"]
-            }
-        },
         express: {
             options: {
             },
@@ -113,64 +54,94 @@ module.exports = function(grunt) {
                 command: 'node test/resources/server.js'
             }
         },
-        // protractor: {
-        //     options: {
-        //         configFile: "test/e2e/e2e.conf.js",
-        //             keepAlive: false,
-        //             noColor: false,
-        //         args: {
-        //         }
-        //     },
-        //     your_target: {
-        //         options: {
-        //             // configFile: "e2e.conf.js", // Target-specific config file
-        //             // args: {} // Target-specific arguments
-        //         }
-        //     },
-        // },
-        // Distribution
-        mkdir: {
-            dist: {
+
+        // server tests
+        mochaTest: {
+            lib: {
                 options: {
-                    create: ['dist', './dist']
+                    reporter: 'spec',
+                    growl: true,
+                    colors: true
                 },
-            },
+                src: ['test/server/**/**/*Spec.js', 'test/common.js']
+            }
         },
-        copy: {
-            dist: {
-                files: [
-                    {
-                        expand: true,
-                        src: ['index.js', 'package.json', 'README.md', 'lib/**/**/**/**/*.js'],
-                        dest: 'dist'
-                    }
-                ]
+
+        // frontent tests
+    	karma: {
+			wercker: {
+				configFile: 'test/client/karma.conf.js',
+                singleRun: true,
+				browsers: ['PhantomJS']
+			},
+			'user-osx': {
+				configFile: 'test/client/karma.conf.js',
+				singleRun: true,
+				logLevel: 'ERROR',
+
+				// test on all browsers avaliable for osx
+				browsers: ['Chrome', 'PhantomJS', 'Firefox', 'Safari'],
+			},
+			'user-win': {
+				configFile: 'test/client/karma.conf.js',
+				singleRun: true,
+				logLevel: 'ERROR',
+
+				// test on all browsers avaliable for windows
+				browsers: ['Chrome', 'PhantomJS', 'Firefox', 'IE'],
+			},
+			'user-linux': {
+				configFile: 'test/client/karma.conf.js',
+				singleRun: true,
+				logLevel: 'ERROR',
+
+				// test on all browsers avaliable for linux
+				browsers: ['Chrome', 'PhantomJS', 'Firefox', 'Opera'],
+			}
+		},
+
+        // e2e tests
+        nightwatch: {
+            options: {
+                standalone: true,
+                jar_path: 'node_modules/selenium-standalone/.selenium/2.42.0/server.jar',
+                src_folders: ['test/e2e/specs'],
+                output_folder: 'test/e2e/report',
+                test_settings: {},
+                settings: {},
+                selenium: {}
             }
         }
     });
 
+	// Run specific tests depending on OS
+	if (process.platform === 'win32') {
+		// windows
+		grunt.registerTask('test:frontend', ['karma:user-win']);
+	} else if(process.platform === 'darwin') {
+		// os
+		grunt.registerTask('test:frontend', ['karma:user-osx']);
+	} else {
+		// linux
+		grunt.registerTask('test:frontend', ['karma:user-linux']);
+	}
+
     // npm modules
     grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-jsdox');
     grunt.loadNpmTasks('grunt-mocha-test');
-    grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-express-server');
     grunt.loadNpmTasks('grunt-shell');
-    grunt.loadNpmTasks('grunt-mocha-selenium');
-    grunt.loadNpmTasks('grunt-browserify');
-    grunt.loadNpmTasks('grunt-contrib-clean');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-mkdir');
-    grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-nightwatch');
+    grunt.loadNpmTasks('grunt-karma');
 
     // tasks
-    grunt.registerTask('build', ['concat:dist', 'concat:angular', 'browserify', 'uglify', 'clean']);
     grunt.registerTask('lint', ['jshint']);
-    grunt.registerTask('test:frontend', ['express']);
-    grunt.registerTask('test:e2e', ['express']);
+    grunt.registerTask('test:e2e', ['express', 'nightwatch']);
     grunt.registerTask('test:backend', ['mochaTest']);
-    grunt.registerTask('test', ['test:backend']);
+    grunt.registerTask('test', ['test:backend', 'test:e2e', 'nightwatch']);
     grunt.registerTask('example', ['shell:express']);
-    grunt.registerTask('dist', ['mkdir:dist', 'copy:dist']);
     grunt.registerTask('default', ['build', 'test', 'lint', 'dist']);
+
+    // to be run by wercker for testing --- 'karma:wercker' needs to be added when passing
+    grunt.registerTask('test:wercker', ['test:backend']);
 };

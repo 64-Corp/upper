@@ -8,7 +8,10 @@ build:
     - npm-install
 
     # Build the project, and run the tests
-    - npm-test
+    - script:
+        name: Check code quality
+        code: |
+          sudo node_modules/.bin/bower install && sudo ./node_modules/.bin/grunt test:wercker
 
     # Check code quality
     - script:

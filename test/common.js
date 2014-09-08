@@ -1,4 +1,2 @@
-(function () {
-    'use strict';
-    global.chai = require('chai').should();
-})();
+'use strict';
+global.chai = require('chai').should();

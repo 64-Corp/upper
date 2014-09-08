@@ -3,3 +3,4 @@ node_modules
 /test/resources/public/bower_components
 lib/static/dist
 dist
+test/e2e/report
