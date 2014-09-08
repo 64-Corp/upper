@@ -11,10 +11,10 @@ build:
     - script:
         name: Check code quality
         code: |
-          sudo node_modules/.bin/bower install && sudo ./node_modules/.bin/grunt test:wercker
+          sudo ./node_modules/.bin/bower install && sudo ./node_modules/.bin/grunt test:wercker
 
     # Check code quality
     - script:
         name: Check code quality
         code: |
-          sudo ./node_modules/.bin/grunt lint
+          ./node_modules/.bin/grunt lint
